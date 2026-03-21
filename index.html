@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profi-Buchhaltungstrainer 2026</title>
     <style>
-        /* Hier wird das Design (CSS) definiert */
+        /* Grunddesign */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6; /* Ein helles, modernes Grau-Blau für den Hintergrund */
+            background-color: #f4f7f6;
             color: #333;
             margin: 0;
             padding: 0;
@@ -18,7 +18,7 @@
         }
 
         header {
-            background-color: #1E3A8A; /* Ein sattes, professionelles Blau */
+            background-color: #1E3A8A;
             color: white;
             text-align: center;
             padding: 3rem 1rem;
@@ -38,19 +38,89 @@
             font-weight: 300;
         }
 
+        /* Container für den Hauptinhalt */
         main {
             width: 95%;
             max-width: 1200px;
-            margin: -2rem auto 2rem auto; /* Zieht die App leicht über den Header für einen coolen 3D-Effekt */
+            margin: -2rem auto 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* --- KACHEL-DESIGN (CSS Grid) --- */
+        .kachel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .kachel {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 5px solid #1E3A8A; /* Schöner blauer Balken oben */
+        }
+
+        .kachel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .kachel h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #1E3A8A;
+        }
+
+        /* --- LINK-LISTE IN DER KACHEL --- */
+        .link-liste {
+            display: none; /* Versteckt die Liste am Anfang */
+            list-style-type: none;
+            padding: 0;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .link-liste li {
+            margin-bottom: 0.8rem;
+        }
+
+        .link-liste button {
+            background: none;
+            border: none;
+            color: #2563EB;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+            padding: 0.5rem;
+            width: 100%;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .link-liste button:hover {
+            background: #e2e8f0;
+            text-decoration: underline;
+        }
+
+        /* --- IFRAME BEREICH --- */
+        #iframe-container {
+            display: none; /* Versteckt das iframe, bis ein Link geklickt wird */
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            overflow: hidden; /* Sorgt dafür, dass die Ecken der eingebetteten App abgerundet bleiben */
+            overflow: hidden;
+            width: 100%;
         }
 
         iframe {
             width: 100%;
-            height: 850px; /* Höhe der App */
+            height: 850px;
             border: none;
             display: block;
         }
@@ -73,12 +143,85 @@
     </header>
 
     <main>
-        <iframe src="https://kontenverwaltungv1py-a92o7att7inheypvansgbo.streamlit.app//?embed=true" title="Buchhaltungstrainer"></iframe>
+        <div class="kachel-grid">
+            
+            <div class="kachel" onclick="toggleListe('liste-buchungen')">
+                <h2>📊 Buchungssätze & Konten</h2>
+                <p>Trainiere das Buchen auf Konten und erstelle Bilanzen. (Klicken zum Öffnen)</p>
+                
+                <ul id="liste-buchungen" class="link-liste">
+                    <li>
+                        <button onclick="loadApp('https://kontenverwaltungv1py-a92o7att7inheypvansgbo.streamlit.app//?embed=true', event)">
+                            Programm 1: Kontenverwaltung V1
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="loadApp('', event)">
+                            Programm 2: (Platzhalter für dein nächstes Tool)
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="loadApp('', event)">
+                            Programm 3: (Demnächst verfügbar)
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="kachel" onclick="toggleListe('liste-theorie')">
+                <h2>📚 Theorie & Grundlagen</h2>
+                <p>Wissen rund um die doppelte Buchführung.</p>
+                
+                <ul id="liste-theorie" class="link-liste">
+                    <li><button>Lektion 1: Was ist eine Bilanz?</button></li>
+                    <li><button>Lektion 2: Aktiv- vs. Passivkonten</button></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div id="iframe-container">
+            <iframe id="app-frame" src="" title="Buchhaltungstrainer"></iframe>
+        </div>
     </main>
 
     <footer>
-        &copy; 2026 Entwickelt von dir. Powered by Streamlit & Python.
+        &copy; 2026 Entwickelt von dir. Powered by Streamlit, Python & HTML.
     </footer>
+
+    <script>
+        // Funktion 1: Kachel auf- und zuklappen
+        function toggleListe(id) {
+            let liste = document.getElementById(id);
+            if (liste.style.display === "block") {
+                liste.style.display = "none";
+            } else {
+                liste.style.display = "block";
+            }
+        }
+
+        // Funktion 2: App ins iframe laden und anzeigen
+        function loadApp(url, event) {
+            event.stopPropagation(); // Verhindert, dass die Kachel sich wieder zuklappt, wenn man den Button klickt
+
+            if (url === '') {
+                alert("Dieses Programm ist noch nicht hinterlegt.");
+                return;
+            }
+
+            let iframeContainer = document.getElementById('iframe-container');
+            let iframe = document.getElementById('app-frame');
+
+            // Setze die neue URL in das iframe
+            iframe.src = url;
+            
+            // Zeige den Container an
+            iframeContainer.style.display = "block";
+
+            // Scrolle sanft nach unten zum Programm
+            iframeContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
