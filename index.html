@@ -38,13 +38,19 @@
             font-weight: 300;
         }
 
-        /* --- Container --- */
+        /* --- Container & Grid --- */
         main {
             width: 95%;
-            max-width: 800px; /* Schmaler, da nur noch eine Kachel */
+            max-width: 1200px; /* Erweitert für 3 Kacheln nebeneinander */
             margin: -3rem auto 3rem auto; 
             display: flex;
             flex-direction: column;
+        }
+
+        .kachel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
         /* --- KACHEL-DESIGN --- */
@@ -54,6 +60,8 @@
             padding: 2.5rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             border-top: 6px solid #3b82f6;
+            display: flex;
+            flex-direction: column;
         }
 
         .kachel h2 {
@@ -81,6 +89,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            flex-grow: 1; /* Schiebt Inhalte schön nach oben */
         }
 
         .link-item {
@@ -96,7 +105,9 @@
         }
 
         .app-link {
-            display: inline-block;
+            display: block; /* Auf block geändert für volle Breite */
+            box-sizing: border-box;
+            text-align: center;
             text-decoration: none;
             color: #2563eb;
             font-size: 1.1rem;
@@ -106,6 +117,7 @@
             transition: all 0.2s;
             font-weight: 600;
             margin-bottom: 1rem;
+            width: 100%;
         }
 
         .app-link:hover {
@@ -120,6 +132,14 @@
             line-height: 1.5;
             display: block;
             text-align: justify; /* Blocksatz */
+        }
+
+        .coming-soon {
+            text-align: center;
+            font-style: italic;
+            color: #94a3b8;
+            margin-top: 1rem;
+            line-height: 1.5;
         }
 
         footer {
@@ -140,35 +160,70 @@
     </header>
 
     <main>
-        <div class="kachel">
-            <h2>Rechnungswesen</h2>
+        <div class="kachel-grid">
             
-            <p class="kachel-intro">
-                Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Sie eignen sich ideal sowohl für den ersten Einstieg in Buchungssätze als auch zur gezielten Vertiefung – von den ersten Schritten bis hin zur komplexen Kontenführung.
-            </p>
-            
-            <div class="link-liste">
-                <div class="link-item">
-                    <a href="buchhaltungV1.html" target="_blank" class="app-link">Kontenverwaltung Einstieg</a>
-                    <span class="app-desc">
-                        Ideal für erste Buchungsschritte. In diesem Modul werden einfache Buchungssätze ohne Umsatzsteuer oder Erfolgskonten trainiert. Es erfolgt noch keine Bearbeitung von komplexen Buchungen, stattdessen liegt der Fokus auf dem grundlegenden Verständnis der Kontenlogik.
-                    </span>
-                </div>
+            <div class="kachel">
+                <h2>Rechnungswesen</h2>
                 
-                <div class="link-item">
-                    <a href="buchhaltungV2.html" target="_blank" class="app-link">Kontenverwaltung Erfolgskonten</a>
-                    <span class="app-desc">
-                        Dieses Modul erweitert die Buchführung um die Erfolgskonten. Trotz der Erweiterung bleibt der Fokus auf einfachen Grundsätzen, um die Auswirkung von Aufwendungen und Erträgen auf das Eigenkapital schrittweise zu verinnerlichen.
-                    </span>
-                </div>
+                <p class="kachel-intro">
+                    Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Sie eignen sich ideal sowohl für den ersten Einstieg in Buchungssätze als auch zur gezielten Vertiefung – von den ersten Schritten bis hin zur komplexen Kontenführung.
+                </p>
                 
-                <div class="link-item">
-                    <a href="buchhaltungV3.html" target="_blank" class="app-link">Kontenverwaltung Gesamt</a>
-                    <span class="app-desc">
-                        Hier erreichen die Lernenden die komplette Selbstständigkeit in der Bearbeitung. Das Programm wird um Umsatzsteuer und Vorsteuer erweitert. Es können sämtliche Konten des Kontenplans genutzt und auch komplexe, verschachtelte Buchungssätze abgebildet werden.
-                    </span>
+                <div class="link-liste">
+                    <div class="link-item">
+                        <a href="buchhaltungV1.html" target="_blank" class="app-link">Kontenverwaltung Einstieg</a>
+                        <span class="app-desc">
+                            Ideal für erste Buchungsschritte. In diesem Modul werden einfache Buchungssätze ohne Umsatzsteuer oder Erfolgskonten trainiert. Es erfolgt noch keine Bearbeitung von komplexen Buchungen, stattdessen liegt der Fokus auf dem grundlegenden Verständnis der Kontenlogik.
+                        </span>
+                    </div>
+                    
+                    <div class="link-item">
+                        <a href="buchhaltungV2.html" target="_blank" class="app-link">Kontenverwaltung Erfolgskonten</a>
+                        <span class="app-desc">
+                            Dieses Modul erweitert die Buchführung um die Erfolgskonten. Trotz der Erweiterung bleibt der Fokus auf einfachen Grundsätzen, um die Auswirkung von Aufwendungen und Erträgen auf das Eigenkapital schrittweise zu verinnerlichen.
+                        </span>
+                    </div>
+                    
+                    <div class="link-item">
+                        <a href="buchhaltungV3.html" target="_blank" class="app-link">Kontenverwaltung Gesamt</a>
+                        <span class="app-desc">
+                            Hier erreichen die Lernenden die komplette Selbstständigkeit in der Bearbeitung. Das Programm wird um Umsatzsteuer und Vorsteuer erweitert. Es können sämtliche Konten des Kontenplans genutzt und auch komplexe, verschachtelte Buchungssätze abgebildet werden.
+                        </span>
+                    </div>
                 </div>
             </div>
+
+            <div class="kachel">
+                <h2>Betriebswirtschaftslehre</h2>
+                
+                <p class="kachel-intro">
+                    Theorie wird hier zur Praxis. Erlebe <strong>betriebswirtschaftliche Entscheidungen</strong> hautnah und simuliere die Auswirkungen von Kosten, Preisen und Marktentwicklungen auf den Unternehmenserfolg.
+                </p>
+                
+                <div class="link-liste">
+                    <div class="link-item">
+                        <a href="HIER_DEIN_STREAMLIT_LINK_REINKOPIEREN" target="_blank" class="app-link">Break-Even-Point Simulator</a>
+                        <span class="app-desc">
+                            Interaktives Tool zur Berechnung der Gewinnschwelle. Simuliere verschiedene Szenarien, verändere Fixkosten, gewähre Rabatte und beobachte in Echtzeit, ab wann dein Unternehmen Gewinn macht.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kachel">
+                <h2>Volkswirtschaftslehre</h2>
+                
+                <p class="kachel-intro">
+                    Verstehe das große Ganze. Unsere <strong>volkswirtschaftlichen Modelle</strong> veranschaulichen komplexe Zusammenhänge zwischen Märkten, Akteuren und staatlichen Eingriffen.
+                </p>
+                
+                <div class="link-liste">
+                    <div class="link-item" style="background-color: #f8fafc; border-style: dashed;">
+                        <span class="coming-soon">Weitere interaktive Module für diesen Bereich befinden sich aktuell in der Entwicklung.</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
