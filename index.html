@@ -75,14 +75,16 @@
             margin-bottom: 1rem;
         }
 
-        .kachel > p {
+        /* Einleitungstext in der Kachel */
+        .kachel-intro {
             color: #475569;
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            line-height: 1.6;
             margin-bottom: 1.5rem;
+            font-style: italic; /* Etwas abgesetzt für bessere Lesbarkeit */
         }
 
-        /* --- LINK-LISTE (Direkt sichtbar) --- */
+        /* --- LINK-LISTE --- */
         .link-liste {
             list-style-type: none;
             padding: 0;
@@ -112,7 +114,6 @@
             color: white;
         }
 
-        /* Beschreibungstexte unter den Links */
         .app-desc {
             font-size: 0.85rem;
             color: #64748b;
@@ -143,7 +144,9 @@
             
             <div class="kachel">
                 <h2>Rechnungswesen</h2>
-                <p>Von den ersten Buchungsschritten bis hin zur komplexen Kontenführung.</p>
+                <p class="kachel-intro">
+                    Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Sie eignen sich ideal sowohl für den ersten Einstieg in Buchungssätze als auch zur gezielten Vertiefung – von den ersten Schritten bis hin zur komplexen Kontenführung.
+                </p>
                 
                 <div class="link-liste">
                     <div class="link-item">
@@ -165,7 +168,7 @@
 
             <div class="kachel">
                 <h2>Betriebswirtschaft</h2>
-                <p>Grundlagen der Unternehmensführung und betriebliche Prozesse.</p>
+                <p class="kachel-intro">Praxisorientierte Simulationen zur Unternehmensführung und zu betrieblichen Prozessen.</p>
                 
                 <div class="link-liste">
                     <div class="link-item">
@@ -177,7 +180,7 @@
 
             <div class="kachel">
                 <h2>Volkswirtschaft</h2>
-                <p>Zusammenhänge in Märkten und gesamtwirtschaftliche Modelle.</p>
+                <p class="kachel-intro">Interaktive Modelle zum Verständnis von Märkten und gesamtwirtschaftlichen Zusammenhängen.</p>
                 
                 <div class="link-liste">
                     <div class="link-item">
