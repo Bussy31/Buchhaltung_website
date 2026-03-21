@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontenverwaltung - Wirtschaftslab-Schule</title>
+    <style>
+        /* Wir nehmen alle Ränder weg und machen die Seite 100% groß */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Verhindert doppelte Scrollbalken */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Der iframe füllt jetzt den ganzen Bildschirm aus */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Ein kleiner Button, falls sie die App nicht in einem neuen Tab, 
+           sondern im selben Tab öffnen und zurück wollen */
+        .zurueck-button {
+            position: absolute; /* Legt den Button über die App */
+            top: 15px;
+            left: 15px;
+            background-color: #0f172a;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background-color 0.2s;
+            z-index: 1000; /* Sorgt dafür, dass der Button immer ganz vorne ist */
+        }
+
+        .zurueck-button:hover {
+            background-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="zurueck-button">← Zurück zur Übersicht</a>
+
+    <iframe src="https://programme-wirtschaft-kavfeh5safoqsm5cyjrepk.streamlit.app/?embed=true" title="Kontenverwaltung V2"></iframe>
+
+</body>
+</html>
