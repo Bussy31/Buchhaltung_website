@@ -8,7 +8,7 @@
         /* --- Grunddesign: Clean & Modern --- */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8fafc; /* Ein sehr helles, sauberes Grau */
+            background-color: #f8fafc;
             color: #1e293b;
             margin: 0;
             padding: 0;
@@ -18,7 +18,7 @@
         }
 
         header {
-            background-color: #0f172a; /* Ein sehr dunkles, modernes Blau/Grau */
+            background-color: #0f172a;
             color: white;
             text-align: center;
             padding: 4rem 1rem;
@@ -38,10 +38,10 @@
             font-weight: 300;
         }
 
-        /* --- Container für den Hauptinhalt --- */
+        /* --- Container --- */
         main {
-            width: 90%;
-            max-width: 1000px; /* Etwas schmaler für einen cleaneren Look */
+            width: 95%;
+            max-width: 1100px;
             margin: -3rem auto 3rem auto; 
             display: flex;
             flex-direction: column;
@@ -51,68 +51,74 @@
         /* --- KACHEL-DESIGN --- */
         .kachel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 24px;
         }
 
         .kachel {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            border-top: 4px solid #3b82f6; /* Dezenter blauer Akzent */
-        }
-
-        .kachel:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #3b82f6;
+            display: flex;
+            flex-direction: column;
         }
 
         .kachel h2 {
             margin-top: 0;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #0f172a;
-            font-weight: 600;
+            font-weight: 700;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .kachel p {
-            color: #64748b;
-            font-size: 0.95rem;
+        .kachel > p {
+            color: #475569;
+            font-size: 1rem;
             line-height: 1.5;
+            margin-bottom: 1.5rem;
         }
 
-        /* --- LINK-LISTE IN DER KACHEL --- */
+        /* --- LINK-LISTE (Direkt sichtbar) --- */
         .link-liste {
-            display: none; /* Versteckt die Liste am Anfang */
             list-style-type: none;
             padding: 0;
-            margin-top: 1.5rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1rem;
+            margin: 0;
         }
 
-        .link-liste li {
-            margin-bottom: 0.5rem;
+        .link-item {
+            margin-bottom: 1.5rem;
         }
 
-        /* Links sehen jetzt aus wie cleane Buttons */
         .app-link {
             display: block;
             text-decoration: none;
             color: #2563eb;
-            font-size: 0.95rem;
+            font-size: 1rem;
             padding: 0.75rem 1rem;
             border-radius: 6px;
             background-color: #f1f5f9;
-            transition: background-color 0.2s, color 0.2s;
-            font-weight: 500;
+            transition: all 0.2s;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 0.5rem;
         }
 
         .app-link:hover {
-            background-color: #3b82f6;
+            background-color: #2563eb;
             color: white;
+        }
+
+        /* Beschreibungstexte unter den Links */
+        .app-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+            padding: 0 0.5rem;
+            display: block;
         }
 
         footer {
@@ -129,59 +135,56 @@
 
     <header>
         <h1>wirtschaftslab-schule</h1>
-        <p class="subtitle">Interaktive Lernprogramme für Wirtschaft, Rechnungswesen und mehr</p>
+        <p class="subtitle">Interaktive Lernprogramme für Wirtschaft und Rechnungswesen</p>
     </header>
 
     <main>
         <div class="kachel-grid">
             
-            <div class="kachel" onclick="toggleListe('liste-buchungen')">
-                <h2>Rechnungswesen & Buchführung</h2>
-                <p>Trainiere das Buchen auf Konten, erstelle Bilanzen und verinnerliche die doppelte Buchführung.</p>
+            <div class="kachel">
+                <h2>Rechnungswesen</h2>
+                <p>Von den ersten Buchungsschritten bis hin zur komplexen Kontenführung.</p>
                 
-                <ul id="liste-buchungen" class="link-liste">
-                    <li>
-                        <a href="buchhaltungV1.html" target="_blank" class="app-link" onclick="event.stopPropagation();">
-                            Kontenverwaltung Einstieg
-                        </a>
-                    </li>
-                    <li>
-                        <a href="buchhaltungV2.html" target="_blank" class="app-link" onclick="event.stopPropagation();">
-                            Kontenverwaltung Erfolgskonten
-                        </a>
-                    </li>
-                     <li>
-                        <a href="buchhaltungV3.html" target="_blank" class="app-link" onclick="event.stopPropagation();">
-                            Kontenverwaltung Gesamt
-                        </a>
-                    </li>
-                </ul>
+                <div class="link-liste">
+                    <div class="link-item">
+                        <a href="buchhaltungV1.html" target="_blank" class="app-link">Kontenverwaltung Einstieg</a>
+                        <span class="app-desc">Ideal für erste Buchungsschritte. Einfache Buchungssätze ohne Umsatzsteuer und ohne komplexe Vertragshandlungen.</span>
+                    </div>
+                    
+                    <div class="link-item">
+                        <a href="buchhaltungV2.html" target="_blank" class="app-link">Kontenverwaltung Erfolgskonten</a>
+                        <span class="app-desc">Erweiterung um Erfolgskonten. Anwendung einfacher Grundsätze der Buchführung für Fortgeschrittene.</span>
+                    </div>
+                    
+                    <div class="link-item">
+                        <a href="buchhaltungV3.html" target="_blank" class="app-link">Kontenverwaltung Gesamt</a>
+                        <span class="app-desc">Komplette Selbstständigkeit: Inklusive Umsatzsteuer, Vorsteuer, sämtlicher Konten und verschachtelter Buchungssätze.</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="kachel" onclick="toggleListe('liste-bwl')">
-                <h2>Betriebswirtschaftslehre</h2>
-                <p>Grundlagen der Unternehmensführung, Marketing, Personal und Finanzierung.</p>
+            <div class="kachel">
+                <h2>Betriebswirtschaft</h2>
+                <p>Grundlagen der Unternehmensführung und betriebliche Prozesse.</p>
                 
-                <ul id="liste-bwl" class="link-liste">
-                    <li>
-                        <a href="#" class="app-link" onclick="event.stopPropagation();">
-                            Simulation: Unternehmensgründung (tbd)
-                        </a>
-                    </li>
-                </ul>
+                <div class="link-liste">
+                    <div class="link-item">
+                        <a href="#" class="app-link">Simulation: Unternehmensgründung</a>
+                        <span class="app-desc">In Entwicklung: Plane dein eigenes Unternehmen von der Idee bis zum Marktstart.</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="kachel" onclick="toggleListe('liste-vwl')">
-                <h2>Volkswirtschaftslehre</h2>
-                <p>Märkte, Preisbildung, Wirtschaftskreislauf und Konjunkturmodelle verstehen.</p>
+            <div class="kachel">
+                <h2>Volkswirtschaft</h2>
+                <p>Zusammenhänge in Märkten und gesamtwirtschaftliche Modelle.</p>
                 
-                <ul id="liste-vwl" class="link-liste">
-                    <li>
-                        <a href="#" class="app-link" onclick="event.stopPropagation();">
-                            Modell: Angebot & Nachfrage (tbd)
-                        </a>
-                    </li>
-                </ul>
+                <div class="link-liste">
+                    <div class="link-item">
+                        <a href="#" class="app-link">Modell: Angebot & Nachfrage</a>
+                        <span class="app-desc">In Entwicklung: Interaktive Preisbildung am Markt verstehen.</span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -190,17 +193,6 @@
     <footer>
         &copy; 2026 Wirtschaftslab-Schule. Entwickelt für modernen Unterricht.
     </footer>
-
-    <script>
-        function toggleListe(id) {
-            let liste = document.getElementById(id);
-            if (liste.style.display === "block") {
-                liste.style.display = "none";
-            } else {
-                liste.style.display = "block";
-            }
-        }
-    </script>
 
 </body>
 </html>
