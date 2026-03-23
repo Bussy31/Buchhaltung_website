@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruttoinlandsprodukt - wirtschaftslab-schule</title>
+    <style>
+        /* Wir nehmen alle Ränder weg und machen die Seite 100% groß */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Verhindert doppelte Scrollbalken */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Der iframe füllt jetzt den ganzen Bildschirm aus */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* CSS für den Zurück-Button auskommentiert:
+        .zurueck-button {
+            position: absolute; 
+            top: 15px;
+            left: 15px;
+            background-color: #0f172a;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background-color 0.2s;
+            z-index: 1000; 
+        }
+
+        .zurueck-button:hover {
+            background-color: #3b82f6;
+        }
+        */
+    </style>
+</head>
+<body>
+
+    <iframe src="https://programme-wirtschaft-ziif2tpyn8xdtrftwy5wsi.streamlit.app/?embed=true" title="Musterland Simulation"></iframe>
+
+</body>
+</html>
+</html>
