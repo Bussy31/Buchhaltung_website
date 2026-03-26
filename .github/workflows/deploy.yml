@@ -1,0 +1,21 @@
+name: Deploy HTML Site
+
+on:
+  push:
+    branches:
+      - main  # Hier 'master' eintragen, falls dein Branch so heißt
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Server updaten und Dateien kopieren
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /Buchhaltung_website
+            git pull origin main
+            sudo cp *.html /var/www/html/
