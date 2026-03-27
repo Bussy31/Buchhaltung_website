@@ -86,7 +86,27 @@
             text-align: justify;
         }
 
-        /* --- HAUPTPROGRAMM HIGHLIGHT --- */
+        /* --- PROGRAMM-BOXEN (Gerahmt) --- */
+        .link-liste {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Einheitliches Design für ALLE Boxen */
+        .link-item {
+            border: 1px solid #93c5fd;
+            border-radius: 8px;
+            padding: 1.25rem;
+            background-color: #f8fafc;
+            transition: border-color 0.2s;
+        }
+
+        .link-item:hover {
+            border-color: #2563eb;
+        }
+
+        /* Einheitliches Design für ALLE Buttons */
         .main-app-link {
             display: block;
             box-sizing: border-box;
@@ -96,57 +116,17 @@
             font-size: 1.2rem;
             padding: 0.8rem 1.2rem;
             border-radius: 6px;
-            background-color: #2563eb;
+            background-color: #0284c7;
             transition: all 0.2s;
             font-weight: 700;
             margin-bottom: 1rem;
             width: 100%;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
         }
 
         .main-app-link:hover {
-            background-color: #1d4ed8;
+            background-color: #0369a1;
             transform: translateY(-2px);
-        }
-
-        /* --- PROGRAMM-BOXEN (Gerahmt) --- */
-        .link-liste {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .link-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.25rem;
-            background-color: #ffffff;
-            transition: border-color 0.2s;
-        }
-
-        .link-item:hover {
-            border-color: #3b82f6;
-        }
-
-        .app-link {
-            display: block;
-            box-sizing: border-box;
-            text-align: center;
-            text-decoration: none;
-            color: #2563eb;
-            font-size: 1.1rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            background-color: #eff6ff;
-            transition: all 0.2s;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            width: 100%;
-        }
-
-        .app-link:hover {
-            background-color: #2563eb;
-            color: white;
         }
 
         .app-desc {
@@ -185,14 +165,14 @@
                 </p>
                 
                 <div class="link-liste">
-                    <div class="link-item" style="border-color: #93c5fd; background-color: #f8fafc;">
-                        <a href="/kontenverwaltung/" target="_blank" class="main-app-link" style="background-color: #0284c7;">🏢 Buchhaltung: Industrie & Handel</a>
+                    <div class="link-item">
+                        <a href="/kontenverwaltung/" target="_blank" class="main-app-link">🏢 Buchhaltung: Industrie & Handel</a>
                         <span class="app-desc">
                             Speziell optimiert für Ausbildungsberufe in Industrie und Handel. Erfasse typische kaufmännische Geschäftsfälle im Grundbuch, buche mit Fokus auf Bestands- und Erfolgskonten und schließe Konten eigenständig ab. Die Ergebnisse lassen sich als strukturiertes PDF sichern.
                         </span>
                     </div>
 
-                    <div class="link-item" style="border-color: #93c5fd; background-color: #f8fafc;">
+                    <div class="link-item">
                         <a href="/kontenverwaltung_bank/" target="_blank" class="main-app-link">🏦 Buchhaltung: Bankwesen</a>
                         <span class="app-desc">
                             Maßgeschneidert für angehende Bankkaufleute. Dieses Modul fokussiert sich auf die Besonderheiten der Bankbuchführung. Trainiere banktypische Geschäftsfälle, arbeite mit speziellen Kontenrahmen des Finanzsektors und verbuche Vorgänge im Kunden- und Eigengeschäft. Auch hier ist der PDF-Export integriert.
@@ -210,7 +190,7 @@
                 
                 <div class="link-liste">
                     <div class="link-item">
-                        <a href="/break-even-point/" target="_blank" class="app-link">📊 Break-Even-Point Simulator</a>
+                        <a href="/break-even-point/" target="_blank" class="main-app-link">📊 Break-Even-Point Simulator</a>
                         <span class="app-desc">
                             Ermittle den Punkt, ab dem ein Unternehmen Gewinn erzielt. Analysiere das Zusammenspiel von fixen und variablen Kosten sowie Absatzmengen in interaktiven Diagrammen.
                         </span>
@@ -227,20 +207,20 @@
                 
                 <div class="link-liste">
                     <div class="link-item">
-                        <a href="/einfacher_wirtschaftskreislauf/" target="_blank" class="app-link">🔄 Einfacher Wirtschaftskreislauf</a>
+                        <a href="/einfacher_wirtschaftskreislauf/" target="_blank" class="main-app-link">🔄 Einfacher Wirtschaftskreislauf</a>
                         <span class="app-desc">
                             Verstehe die grundlegenden Tauschbeziehungen zwischen privaten Haushalten und Unternehmen. Verfolge Geld- und Güterströme in einer Basis-Volkswirtschaft ohne Staat.
                         </span>
                     </div>
                     
                     <div class="link-item">
-                        <a href="/erweiterter_wirtschaftskreislauf/" target="_blank" class="app-link">🌍 Erweiterter Wirtschaftskreislauf</a>
+                        <a href="/erweiterter_wirtschaftskreislauf/" target="_blank" class="main-app-link">🌍 Erweiterter Wirtschaftskreislauf</a>
                         <span class="app-desc">
                             Betrachte das erweiterte Modell: Binde den Staat, Banken (Kapitalsammelstellen) und das Ausland ein, um realitätsnahe makroökonomische Prozesse zu analysieren.
                         </span>
                     </div>
                     
-                    <div class="link-item" style="border-color: #93c5fd; background-color: #f8fafc;">
+                    <div class="link-item">
                         <a href="/bip/" target="_blank" class="main-app-link">📈 Musterland Simulation BIP</a>
                         <span class="app-desc">
                             „Musterland“ ist eine Wirtschaftssimulation, in der Schüler als Regierung durch bis zu 100 Szenarien die Mechanik des BIP steuern. Das Dashboard gibt Sofort-Feedback zu Zielkonflikten, während der PDF-Export die Ergebnisse für die Analyse im Unterricht sichert. So wird Theorie zu angewandtem Systemverständnis.
@@ -257,8 +237,8 @@
                 </p>
                 
                 <div class="link-liste">
-                    <div class="link-item" style="border-color: #93c5fd; background-color: #f8fafc;">
-                        <a href="/entgeltabrechnung/" target="_blank" class="main-app-link" style="background-color: #0284c7;">💶 Entgeltabrechnung</a>
+                    <div class="link-item">
+                        <a href="/entgeltabrechnung/" target="_blank" class="main-app-link">💶 Entgeltabrechnung</a>
                         <span class="app-desc">
                             Erstelle schrittweise eine komplette Lohn- und Gehaltsabrechnung. Berechne ausgehend vom Bruttolohn alle gesetzlichen Abzüge wie Lohnsteuer und Sozialabgaben bis zum finalen Auszahlungsbetrag.
                         </span>
