@@ -24,69 +24,42 @@
             background-color: #0f172a;
             color: white;
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Zentriert den Inhalt horizontal */
             align-items: center;
-            padding: 1rem 5%;
-            flex-wrap: wrap;
+            padding: 1.5rem 5%;
         }
 
         .header-text-group {
-            text-align: left;
+            text-align: center; /* Zentriert den Text */
         }
 
         h1 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
 
         p.subtitle {
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
             color: #94a3b8;
             font-weight: 300;
         }
 
-        .header-board-link {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-            white-space: nowrap;
-        }
-
-        .header-board-link:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-        }
-
         @media (max-width: 768px) {
             header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
                 padding: 1.5rem 1rem;
             }
-            .header-text-group { text-align: center; }
-            .header-board-link {
-                margin-top: 10px;
+            h1 {
+                font-size: 1.8rem;
             }
         }
 
         /* --- Container (Split-Layout) --- */
         main {
             width: 95%;
-            max-width: 1200px; /* Breiter gemacht für das Zwei-Spalten-Layout */
+            max-width: 1200px;
             margin: 3rem auto;
             display: flex;
             gap: 2rem;
@@ -95,10 +68,35 @@
 
         /* --- Linke Spalte: Menü --- */
         .sidebar-menu {
-            width: 35%; /* Nimmt ca. ein Drittel ein */
+            width: 35%;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.5rem; /* Abstand zwischen den normalen Menü-Buttons */
+        }
+
+        /* NEU: Teacher-Board Link als Kachel in der Sidebar */
+        .sidebar-board-link {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            text-decoration: none;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 1.5rem; /* Deutlicher Abstand zu den anderen Kacheln */
+        }
+
+        .sidebar-board-link:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.3);
         }
 
         .menu-btn {
@@ -144,7 +142,7 @@
 
         /* --- Rechte Spalte: Inhalt --- */
         .content-area {
-            width: 65%; /* Nimmt den Rest ein */
+            width: 65%;
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05);
@@ -266,11 +264,15 @@
             <h1>wirtschaftslab-schule</h1>
             <p class="subtitle">Interaktive Lernprogramme für Wirtschaft und Rechnungswesen</p>
         </div>
-        <a href="wirtschaftslab-board/board.html" class="header-board-link">🎓 Zum Teacher-Board</a>
     </header>
 
     <main>
         <aside class="sidebar-menu">
+
+            <a href="wirtschaftslab-board/board.html" class="sidebar-board-link">
+                🎓 Zum Teacher-Board
+            </a>
+
             <button class="menu-btn active" onclick="switchCategory('rw', this)">
                 Rechnungswesen <span class="icon-pfeil">➔</span>
             </button>
