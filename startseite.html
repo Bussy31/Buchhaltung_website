@@ -19,38 +19,40 @@
             -webkit-hyphens: auto;
         }
 
-/* --- Header Optimierung --- */
+        /* --- Header Optimierung --- */
         header {
             background-color: #0f172a;
             color: white;
             display: flex;
-            justify-content: space-between; /* Verteilt Titel links/mitte und Button rechts */
+            justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%; /* Deutlich schmaler (oben/unten nur 1rem) */
-            flex-wrap: wrap; /* Falls es auf dem Handy zu eng wird */
+            padding: 1rem 5%;
+            flex-wrap: wrap;
         }
 
         .header-text-group {
-            text-align: center;
+            text-align: left;
         }
 
         h1 {
             margin: 0;
-            font-size: 1.8rem; /* Etwas kleiner */
+            font-size: 1.8rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         p.subtitle {
-            font-size: 0.9rem; /* Etwas kleiner */
-            margin: 0;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
             color: #94a3b8;
+            font-weight: 300;
         }
 
         .header-board-link {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
             text-decoration: none;
-            padding: 12px 24px; /* Button etwas präsenter */
+            padding: 12px 24px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
@@ -68,16 +70,6 @@
             background: linear-gradient(135deg, #60a5fa, #3b82f6);
         }
 
-        /* Container-Abstand anpassen, da Header jetzt flacher ist */
-        main {
-            width: 95%;
-            max-width: 900px;
-            margin: 2rem auto; /* Kleinerer Abstand nach oben */
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -86,115 +78,100 @@
                 padding: 1.5rem 1rem;
             }
             .header-text-group { text-align: center; }
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        p.subtitle {
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            color: #94a3b8;
-            font-weight: 300;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 2rem 1rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
             .header-board-link {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 20px;
+                margin-top: 10px;
             }
         }
 
-        /* --- Container --- */
+        /* --- Container (Split-Layout) --- */
         main {
             width: 95%;
-            max-width: 900px; /* Schön schmal für die Liste */
-            margin: 3rem auto; /* Genug Abstand zum Header! */
+            max-width: 1200px; /* Breiter gemacht für das Zwei-Spalten-Layout */
+            margin: 3rem auto;
+            display: flex;
+            gap: 2rem;
+            flex-grow: 1;
+        }
+
+        /* --- Linke Spalte: Menü --- */
+        .sidebar-menu {
+            width: 35%; /* Nimmt ca. ein Drittel ein */
             display: flex;
             flex-direction: column;
-            gap: 1.5rem; /* Abstand zwischen den zugeklappten Kacheln */
+            gap: 0.5rem;
         }
 
-        /* --- Aufklappbare Kacheln (Akkordeon) --- */
-        .kachel {
+        .menu-btn {
             background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border-left: 6px solid #3b82f6;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .kachel-header {
-            width: 100%;
-            background: white;
-            border: none;
-            padding: 1.5rem 2rem;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            text-align: left;
-            transition: background 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .kachel-header:hover {
+        .menu-btn:hover {
             background: #f1f5f9;
+            border-color: #cbd5e1;
         }
 
-        .kachel-header h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #0f172a;
-            font-weight: 700;
+        /* Aktiver Menüpunkt */
+        .menu-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #2563eb;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+
+        .menu-btn.active .icon-pfeil {
+            color: white;
+            transform: translateX(5px);
         }
 
         .icon-pfeil {
             font-size: 1.2rem;
-            color: #3b82f6;
-            transition: transform 0.3s ease;
+            color: #94a3b8;
+            transition: transform 0.2s ease, color 0.2s;
         }
 
-        /* Wenn die Kachel aktiv/offen ist */
-        .kachel.active {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            margin: 1rem 0; /* Etwas mehr Platz nach oben und unten machen, wenn offen */
+        /* --- Rechte Spalte: Inhalt --- */
+        .content-area {
+            width: 65%; /* Nimmt den Rest ein */
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid #3b82f6;
+            padding: 2.5rem;
+            position: relative;
         }
 
-        .kachel.active .icon-pfeil {
-            transform: rotate(180deg); /* Pfeil dreht sich nach oben */
-        }
-
-        .kachel.active .kachel-header {
-            border-bottom: 2px solid #f1f5f9;
-        }
-
-        /* Der eigentliche Inhalt, standardmäßig versteckt */
-        .kachel-content {
+        .content-panel {
             display: none;
-            padding: 2rem;
             animation: fadeIn 0.4s ease;
         }
 
-        .kachel.active .kachel-content {
-            display: block; /* Inhalt anzeigen, wenn aktiv */
+        .content-panel.active {
+            display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-5px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-panel h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: #0f172a;
         }
 
         .kachel-intro {
@@ -214,15 +191,16 @@
         }
 
         .link-item {
-            border: 1px solid #93c5fd;
+            border: 1px solid #e0f2fe;
             border-radius: 8px;
             padding: 1.25rem;
             background-color: #f8fafc;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .link-item:hover {
-            border-color: #2563eb;
+            border-color: #7dd3fc;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .main-app-link {
@@ -263,6 +241,22 @@
             color: #94a3b8;
             border-top: 1px solid #e2e8f0;
         }
+
+        /* Mobile Anpassung: Untereinander statt nebeneinander */
+        @media (max-width: 900px) {
+            main {
+                flex-direction: column;
+            }
+            .sidebar-menu, .content-area {
+                width: 100%;
+            }
+            .menu-btn {
+                padding: 1rem;
+            }
+            .content-area {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -276,12 +270,25 @@
     </header>
 
     <main>
-        <div class="kachel">
-            <button class="kachel-header" onclick="toggleKachel(this)">
-                <h2>Rechnungswesen</h2>
-                <span class="icon-pfeil">▼</span>
+        <aside class="sidebar-menu">
+            <button class="menu-btn active" onclick="switchCategory('rw', this)">
+                Rechnungswesen <span class="icon-pfeil">➔</span>
             </button>
-            <div class="kachel-content">
+            <button class="menu-btn" onclick="switchCategory('bwl', this)">
+                Betriebswirtschaftslehre <span class="icon-pfeil">➔</span>
+            </button>
+            <button class="menu-btn" onclick="switchCategory('vwl', this)">
+                Volkswirtschaftslehre <span class="icon-pfeil">➔</span>
+            </button>
+            <button class="menu-btn" onclick="switchCategory('sonstiges', this)">
+                Sonstiges <span class="icon-pfeil">➔</span>
+            </button>
+        </aside>
+
+        <section class="content-area">
+
+            <div id="rw" class="content-panel active">
+                <h2>Rechnungswesen</h2>
                 <p class="kachel-intro">
                     Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Wähle die passende Software für deinen Ausbildungsschwerpunkt, um die doppelte Buchführung interaktiv und vollständig digital zu trainieren.
                 </p>
@@ -300,14 +307,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="kachel">
-            <button class="kachel-header" onclick="toggleKachel(this)">
+            <div id="bwl" class="content-panel">
                 <h2>Betriebswirtschaftslehre</h2>
-                <span class="icon-pfeil">▼</span>
-            </button>
-            <div class="kachel-content">
                 <p class="kachel-intro">
                     Theorie wird hier zur Praxis. Erlebe <strong>betriebswirtschaftliche Entscheidungen</strong> hautnah und simuliere die Auswirkungen von Kosten, Preisen und Marktentwicklungen auf den Unternehmenserfolg.
                 </p>
@@ -326,14 +328,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="kachel">
-            <button class="kachel-header" onclick="toggleKachel(this)">
+            <div id="vwl" class="content-panel">
                 <h2>Volkswirtschaftslehre</h2>
-                <span class="icon-pfeil">▼</span>
-            </button>
-            <div class="kachel-content">
                 <p class="kachel-intro">
                     Verstehe das große Ganze. Unsere <strong>volkswirtschaftlichen Modelle</strong> veranschaulichen komplexe Zusammenhänge zwischen Märkten, Akteuren und staatlichen Eingriffen.
                 </p>
@@ -358,14 +355,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="kachel">
-            <button class="kachel-header" onclick="toggleKachel(this)">
+            <div id="sonstiges" class="content-panel">
                 <h2>Sonstiges</h2>
-                <span class="icon-pfeil">▼</span>
-            </button>
-            <div class="kachel-content">
                 <p class="kachel-intro">
                     Weitere hilfreiche Tools, Rechner und Simulationen für den kaufmännischen Alltag und vertiefende Themen im Wirtschaftsunterricht.
                 </p>
@@ -378,8 +370,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+        </section>
     </main>
 
     <footer>
@@ -389,19 +381,24 @@
     </footer>
 
     <script>
-        function toggleKachel(button) {
-            const geklickteKachel = button.parentElement;
-            const alleKacheln = document.querySelectorAll('.kachel');
-
-            // 1. Alle anderen Kacheln schließen
-            alleKacheln.forEach(kachel => {
-                if (kachel !== geklickteKachel) {
-                    kachel.classList.remove('active');
-                }
+        function switchCategory(categoryId, btnElement) {
+            // 1. Alle Inhaltsbereiche ausblenden
+            const panels = document.querySelectorAll('.content-panel');
+            panels.forEach(panel => {
+                panel.classList.remove('active');
             });
 
-            // 2. Die geklickte Kachel öffnen (oder wieder schließen, wenn sie schon offen war)
-            geklickteKachel.classList.toggle('active');
+            // 2. Bei allen Buttons die "active" Klasse entfernen
+            const buttons = document.querySelectorAll('.menu-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 3. Den gewünschten Inhalt anzeigen
+            document.getElementById(categoryId).classList.add('active');
+
+            // 4. Den geklickten Button als aktiv markieren
+            btnElement.classList.add('active');
         }
     </script>
 
