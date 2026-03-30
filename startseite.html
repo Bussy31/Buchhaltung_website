@@ -15,27 +15,33 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            hyphens: auto;
+            -webkit-hyphens: auto;
         }
 
-        /* --- Header --- */
+/* --- Header Optimierung --- */
         header {
             background-color: #0f172a;
             color: white;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Verteilt Titel links/mitte und Button rechts */
             align-items: center;
-            padding: 1rem 5%;
-            z-index: 10;
+            padding: 1rem 5%; /* Deutlich schmaler (oben/unten nur 1rem) */
+            flex-wrap: wrap; /* Falls es auf dem Handy zu eng wird */
         }
 
-        .header-text-group h1 {
+        .header-text-group {
+            text-align: center;
+        }
+
+        h1 {
             margin: 0;
-            font-size: 1.6rem;
+            font-size: 1.8rem; /* Etwas kleiner */
             font-weight: 600;
         }
 
-        .header-text-group p.subtitle {
-            font-size: 0.85rem;
+        p.subtitle {
+            font-size: 0.9rem; /* Etwas kleiner */
             margin: 0;
             color: #94a3b8;
         }
@@ -44,11 +50,16 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 24px; /* Button etwas präsenter */
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.2);
             white-space: nowrap;
         }
 
@@ -57,142 +68,200 @@
             background: linear-gradient(135deg, #60a5fa, #3b82f6);
         }
 
-        /* --- Layout: Sidebar & Content --- */
+        /* Container-Abstand anpassen, da Header jetzt flacher ist */
         main {
-            display: flex;
-            flex: 1; /* Füllt den Rest des Bildschirms */
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 0;
-        }
-
-        /* Linke Seite: Navigation */
-        .sidebar {
-            width: 300px;
-            background-color: #f1f5f9;
-            padding: 2rem 1.5rem;
-            border-right: 1px solid #e2e8f0;
+            width: 95%;
+            max-width: 900px;
+            margin: 2rem auto; /* Kleinerer Abstand nach oben */
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
-        /* Rechte Seite: Inhaltsbereich */
-        .content-area {
-            flex: 1;
-            padding: 2rem 3rem;
-            background-color: #f8fafc;
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+            .header-text-group { text-align: center; }
         }
 
-        /* --- Menü-Buttons (ehemals Kacheln) --- */
-        .menu-btn {
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-board-link {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* --- Container --- */
+        main {
+            width: 95%;
+            max-width: 900px; /* Schön schmal für die Liste */
+            margin: 3rem auto; /* Genug Abstand zum Header! */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Abstand zwischen den zugeklappten Kacheln */
+        }
+
+        /* --- Aufklappbare Kacheln (Akkordeon) --- */
+        .kachel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #3b82f6;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .kachel-header {
             width: 100%;
             background: white;
-            border: 1px solid #e2e8f0;
-            border-left: 6px solid #3b82f6;
-            border-radius: 10px;
-            padding: 1.2rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            border: none;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
         }
 
-        .menu-btn h2 {
+        .kachel-header:hover {
+            background: #f1f5f9;
+        }
+
+        .kachel-header h2 {
             margin: 0;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             color: #0f172a;
-            pointer-events: none;
+            font-weight: 700;
         }
 
-        .menu-btn:hover {
-            background: #e2e8f0;
-            transform: translateX(5px);
+        .icon-pfeil {
+            font-size: 1.2rem;
+            color: #3b82f6;
+            transition: transform 0.3s ease;
         }
 
-        .menu-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+        /* Wenn die Kachel aktiv/offen ist */
+        .kachel.active {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0; /* Etwas mehr Platz nach oben und unten machen, wenn offen */
         }
 
-        .menu-btn.active h2 {
-            color: white;
+        .kachel.active .icon-pfeil {
+            transform: rotate(180deg); /* Pfeil dreht sich nach oben */
         }
 
-        /* --- Inhalte --- */
-        .tab-content {
-            display: none; /* Standardmäßig versteckt */
+        .kachel.active .kachel-header {
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        /* Der eigentliche Inhalt, standardmäßig versteckt */
+        .kachel-content {
+            display: none;
+            padding: 2rem;
             animation: fadeIn 0.4s ease;
         }
 
-        .tab-content.active {
-            display: block; /* Nur der aktive Tab wird gezeigt */
+        .kachel.active .kachel-content {
+            display: block; /* Inhalt anzeigen, wenn aktiv */
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(10px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .kachel-intro {
             color: #475569;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
+            margin-top: 0;
             margin-bottom: 2rem;
+            text-align: justify;
         }
 
-        /* --- Programm-Boxen (Rechts) --- */
+        /* --- PROGRAMM-BOXEN --- */
         .link-liste {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
         }
 
         .link-item {
             border: 1px solid #93c5fd;
-            border-radius: 12px;
-            padding: 1.5rem;
-            background-color: white;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            padding: 1.25rem;
+            background-color: #f8fafc;
+            transition: border-color 0.2s;
+        }
+
+        .link-item:hover {
+            border-color: #2563eb;
         }
 
         .main-app-link {
             display: block;
+            box-sizing: border-box;
             text-align: center;
             text-decoration: none;
             color: white;
-            font-size: 1.1rem;
-            padding: 0.8rem;
-            border-radius: 8px;
+            font-size: 1.2rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
             background-color: #0284c7;
+            transition: all 0.2s;
             font-weight: 700;
             margin-bottom: 1rem;
+            width: 100%;
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+        }
+
+        .main-app-link:hover {
+            background-color: #0369a1;
+            transform: translateY(-2px);
         }
 
         .app-desc {
             font-size: 0.95rem;
             color: #64748b;
             line-height: 1.5;
-        }
-
-        /* --- Responsivität für Handys --- */
-        @media (max-width: 850px) {
-            main { flex-direction: column; }
-            .sidebar { width: auto; border-right: none; border-bottom: 1px solid #e2e8f0; padding: 1rem; }
-            .content-area { padding: 1.5rem; }
+            display: block;
+            text-align: justify;
         }
 
         footer {
-            padding: 1.5rem;
+            margin-top: auto;
+            padding: 2rem;
             text-align: center;
             font-size: 0.85rem;
             color: #94a3b8;
             border-top: 1px solid #e2e8f0;
-            background: white;
         }
     </style>
 </head>
@@ -207,107 +276,132 @@
     </header>
 
     <main>
-        <nav class="sidebar">
-            <button class="menu-btn active" onclick="openTab(event, 'rechnungswesen')">
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
                 <h2>Rechnungswesen</h2>
-                <span>➜</span>
+                <span class="icon-pfeil">▼</span>
             </button>
-            <button class="menu-btn" onclick="openTab(event, 'bwl')">
-                <h2>Betriebswirtschaft</h2>
-                <span>➜</span>
-            </button>
-            <button class="menu-btn" onclick="openTab(event, 'vwl')">
-                <h2>Volkswirtschaft</h2>
-                <span>➜</span>
-            </button>
-            <button class="menu-btn" onclick="openTab(event, 'sonstiges')">
-                <h2>Sonstiges</h2>
-                <span>➜</span>
-            </button>
-        </nav>
-
-        <section class="content-area">
-
-            <div id="rechnungswesen" class="tab-content active">
+            <div class="kachel-content">
                 <p class="kachel-intro">
-                    Wähle die passende Software für deinen Ausbildungsschwerpunkt, um die doppelte Buchführung interaktiv und vollständig digital zu trainieren.
+                    Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Wähle die passende Software für deinen Ausbildungsschwerpunkt, um die doppelte Buchführung interaktiv und vollständig digital zu trainieren.
                 </p>
                 <div class="link-liste">
                     <div class="link-item">
-                        <a href="/kontenverwaltung/" target="_blank" class="main-app-link">🏢 Industrie & Handel</a>
-                        <span class="app-desc">Speziell optimiert für Ausbildungsberufe in Industrie und Handel. Erfasse Geschäftsfälle, buche Bestands- und Erfolgskonten.</span>
+                        <a href="/kontenverwaltung/" target="_blank" class="main-app-link">🏢 Buchhaltung: Industrie & Handel</a>
+                        <span class="app-desc">
+                            Speziell optimiert für Ausbildungsberufe in Industrie und Handel. Erfasse typische kaufmännische Geschäftsfälle im Grundbuch, buche mit Fokus auf Bestands- und Erfolgskonten und schließe Konten eigenständig ab. Die Ergebnisse lassen sich als strukturiertes PDF sichern.
+                        </span>
                     </div>
                     <div class="link-item">
-                        <a href="/kontenverwaltung_bank/" target="_blank" class="main-app-link">🏦 Bankwesen</a>
-                        <span class="app-desc">Maßgeschneidert für Bankkaufleute. Fokus auf banktypische Geschäftsfälle und spezielle Kontenrahmen.</span>
+                        <a href="/kontenverwaltung_bank/" target="_blank" class="main-app-link">🏦 Buchhaltung: Bankwesen</a>
+                        <span class="app-desc">
+                            Maßgeschneidert für angehende Bankkaufleute. Dieses Modul fokussiert sich auf die Besonderheiten der Bankbuchführung. Trainiere banktypische Geschäftsfälle, arbeite mit speziellen Kontenrahmen des Finanzsektors und verbuche Vorgänge im Kunden- und Eigengeschäft.
+                        </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="bwl" class="tab-content">
-                <p class="kachel-intro">Simuliere die Auswirkungen von Kosten, Preisen und Marktentwicklungen auf den Unternehmenserfolg.</p>
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
+                <h2>Betriebswirtschaftslehre</h2>
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
+                <p class="kachel-intro">
+                    Theorie wird hier zur Praxis. Erlebe <strong>betriebswirtschaftliche Entscheidungen</strong> hautnah und simuliere die Auswirkungen von Kosten, Preisen und Marktentwicklungen auf den Unternehmenserfolg.
+                </p>
                 <div class="link-liste">
                     <div class="link-item">
-                        <a href="/break-even-point/" target="_blank" class="main-app-link">📊 Break-Even-Point</a>
-                        <span class="app-desc">Analysiere das Zusammenspiel von fixen/variablen Kosten und Absatzmengen in interaktiven Diagrammen.</span>
+                        <a href="/break-even-point/" target="_blank" class="main-app-link">📊 Break-Even-Point Simulator</a>
+                        <span class="app-desc">
+                            Ermittle den Punkt, ab dem ein Unternehmen Gewinn erzielt. Analysiere das Zusammenspiel von fixen und variablen Kosten sowie Absatzmengen in interaktiven Diagrammen.
+                        </span>
                     </div>
                     <div class="link-item">
                         <a href="/nutzwertanalyse/" target="_blank" class="main-app-link">⚖️ Nutzwertanalyse</a>
-                        <span class="app-desc">Bewerte Handlungsalternativen und ermittle mathematisch die optimalste Lösung.</span>
+                         <span class="app-desc">
+                            Triff fundierte Entscheidungen bei komplexen Problemen. Gewichte verschiedene Kriterien, bewerte Handlungsalternativen und ermittle mathematisch die optimalste Lösung für dein Unternehmen.
+                        </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="vwl" class="tab-content">
-                <p class="kachel-intro">Verstehe komplexe Zusammenhänge zwischen Märkten, Akteuren und staatlichen Eingriffen.</p>
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
+                <h2>Volkswirtschaftslehre</h2>
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
+                <p class="kachel-intro">
+                    Verstehe das große Ganze. Unsere <strong>volkswirtschaftlichen Modelle</strong> veranschaulichen komplexe Zusammenhänge zwischen Märkten, Akteuren und staatlichen Eingriffen.
+                </p>
                 <div class="link-liste">
                     <div class="link-item">
-                        <a href="/einfacher_wirtschaftskreislauf/" target="_blank" class="main-app-link">🔄 Einfacher Kreislauf</a>
-                        <span class="app-desc">Tauschbeziehungen zwischen privaten Haushalten und Unternehmen.</span>
+                        <a href="/einfacher_wirtschaftskreislauf/" target="_blank" class="main-app-link">🔄 Einfacher Wirtschaftskreislauf</a>
+                        <span class="app-desc">
+                            Verstehe die grundlegenden Tauschbeziehungen zwischen privaten Haushalten und Unternehmen. Verfolge Geld- und Güterströme in einer Basis-Volkswirtschaft ohne Staat.
+                        </span>
                     </div>
                     <div class="link-item">
-                        <a href="/erweiterter_wirtschaftskreislauf/" target="_blank" class="main-app-link">🌍 Erweiterter Kreislauf</a>
-                        <span class="app-desc">Binde Staat, Banken und das Ausland in die makroökonomische Analyse ein.</span>
+                        <a href="/erweiterter_wirtschaftskreislauf/" target="_blank" class="main-app-link">🌍 Erweiterter Wirtschaftskreislauf</a>
+                        <span class="app-desc">
+                            Betrachte das erweiterte Modell: Binde den Staat, Banken (Kapitalsammelstellen) und das Ausland ein, um realitätsnahe makroökonomische Prozesse zu analysieren.
+                        </span>
                     </div>
                     <div class="link-item">
-                        <a href="/bip/" target="_blank" class="main-app-link">📈 Musterland BIP</a>
-                        <span class="app-desc">Steuere als Regierung die Mechanik des BIP durch bis zu 100 Szenarien.</span>
+                        <a href="/bip/" target="_blank" class="main-app-link">📈 Musterland Simulation BIP</a>
+                        <span class="app-desc">
+                            „Musterland“ ist eine Wirtschaftssimulation, in der Schüler als Regierung durch bis zu 100 Szenarien die Mechanik des BIP steuern. Das Dashboard gibt Sofort-Feedback zu Zielkonflikten.
+                        </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="sonstiges" class="tab-content">
-                <p class="kachel-intro">Weitere hilfreiche Tools und Rechner für den kaufmännischen Alltag.</p>
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
+                <h2>Sonstiges</h2>
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
+                <p class="kachel-intro">
+                    Weitere hilfreiche Tools, Rechner und Simulationen für den kaufmännischen Alltag und vertiefende Themen im Wirtschaftsunterricht.
+                </p>
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/entgeltabrechnung/" target="_blank" class="main-app-link">💶 Entgeltabrechnung</a>
-                        <span class="app-desc">Berechne schrittweise Brutto- und Nettolohn inklusive aller Abzüge.</span>
+                        <span class="app-desc">
+                            Erstelle schrittweise eine komplette Lohn- und Gehaltsabrechnung. Berechne ausgehend vom Bruttolohn alle gesetzlichen Abzüge wie Lohnsteuer und Sozialabgaben bis zum finalen Auszahlungsbetrag.
+                        </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-        </section>
     </main>
 
     <footer>
-        &copy; 2026 wirtschaftslab-schule. |
-        <a href="impressum.html" style="color: #64748b; text-decoration: none; margin: 0 10px;">Impressum</a>
-        <a href="datenschutz.html" style="color: #64748b; text-decoration: none;">Datenschutz</a>
+        &copy; 2026 wirtschaftslab-schule. Entwickelt für modernen Unterricht. <br><br>
+        <a href="impressum.html" style="color: #64748b; text-decoration: none; margin-right: 15px;">Impressum</a>
+        <a href="datenschutz.html" style="color: #64748b; text-decoration: none;">Datenschutzerklärung</a>
     </footer>
 
     <script>
-        function openTab(evt, tabName) {
-            // 1. Alle Inhalte verstecken
-            const tabContents = document.querySelectorAll(".tab-content");
-            tabContents.forEach(content => content.classList.remove("active"));
+        function toggleKachel(button) {
+            const geklickteKachel = button.parentElement;
+            const alleKacheln = document.querySelectorAll('.kachel');
 
-            // 2. Alle Button-Markierungen entfernen
-            const menuBtns = document.querySelectorAll(".menu-btn");
-            menuBtns.forEach(btn => btn.classList.remove("active"));
+            // 1. Alle anderen Kacheln schließen
+            alleKacheln.forEach(kachel => {
+                if (kachel !== geklickteKachel) {
+                    kachel.classList.remove('active');
+                }
+            });
 
-            // 3. Den gewählten Inhalt zeigen & Button markieren
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
+            // 2. Die geklickte Kachel öffnen (oder wieder schließen, wenn sie schon offen war)
+            geklickteKachel.classList.toggle('active');
         }
     </script>
 
