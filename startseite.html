@@ -19,23 +19,38 @@
             -webkit-hyphens: auto;
         }
 
-        /* --- Header & Board Button --- */
+/* --- Header Optimierung --- */
         header {
-            position: relative;
             background-color: #0f172a;
             color: white;
-            text-align: center;
-            padding: 4rem 1rem;
+            display: flex;
+            justify-content: space-between; /* Verteilt Titel links/mitte und Button rechts */
+            align-items: center;
+            padding: 1rem 5%; /* Deutlich schmaler (oben/unten nur 1rem) */
+            flex-wrap: wrap; /* Falls es auf dem Handy zu eng wird */
+        }
+
+        .header-text-group {
+            text-align: left;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem; /* Etwas kleiner */
+            font-weight: 600;
+        }
+
+        p.subtitle {
+            font-size: 0.9rem; /* Etwas kleiner */
+            margin: 0;
+            color: #94a3b8;
         }
 
         .header-board-link {
-            position: absolute;
-            top: 30px;
-            right: 40px;
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 24px; /* Button etwas präsenter */
             border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
@@ -45,12 +60,32 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: all 0.2s ease;
             border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
         }
 
         .header-board-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            transform: scale(1.05);
             background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        }
+
+        /* Container-Abstand anpassen, da Header jetzt flacher ist */
+        main {
+            width: 95%;
+            max-width: 900px;
+            margin: 2rem auto; /* Kleinerer Abstand nach oben */
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 1.5rem 1rem;
+            }
+            .header-text-group { text-align: center; }
         }
 
         h1 {
@@ -233,9 +268,11 @@
 <body>
 
     <header>
+        <div class="header-text-group">
+            <h1>wirtschaftslab-schule</h1>
+            <p class="subtitle">Interaktive Lernprogramme für Wirtschaft und Rechnungswesen</p>
+        </div>
         <a href="wirtschaftslab-board/board.html" class="header-board-link">🎓 Zum Teacher-Board</a>
-        <h1>wirtschaftslab-schule</h1>
-        <p class="subtitle">Interaktive Lernprogramme für Wirtschaft und Rechnungswesen</p>
     </header>
 
     <main>
