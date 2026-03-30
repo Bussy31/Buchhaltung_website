@@ -20,11 +20,38 @@
             -webkit-hyphens: auto;
         }
 
+        /* --- Header & Board Button --- */
         header {
+            position: relative; /* Wichtig für die Positionierung des Buttons */
             background-color: #0f172a;
             color: white;
             text-align: center;
             padding: 4rem 1rem;
+        }
+
+        .header-board-link {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .header-board-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
         }
 
         h1 {
@@ -41,18 +68,35 @@
             font-weight: 300;
         }
 
+        /* Responsive Anpassung für den Header auf kleinen Bildschirmen */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-board-link {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+        }
+
         /* --- Container & Grid --- */
         main {
             width: 95%;
-            max-width: 1200px;
-            margin: -3rem auto 3rem auto; 
+            max-width: 1500px; /* VERGRÖSSERT, damit 4 Kacheln nebeneinander passen */
+            margin: -3rem auto 3rem auto;
             display: flex;
             flex-direction: column;
         }
 
         .kachel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            /* Mindestbreite leicht verringert, damit 4 Spalten auf Standard-Laptops passen */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
 
@@ -150,20 +194,22 @@
 <body>
 
     <header>
+        <a href="board.html" class="header-board-link">🎓 Zum Teacher-Board</a>
+
         <h1>wirtschaftslab-schule</h1>
         <p class="subtitle">Interaktive Lernprogramme für Wirtschaft und Rechnungswesen</p>
     </header>
 
     <main>
         <div class="kachel-grid">
-            
+
             <div class="kachel">
                 <h2>Rechnungswesen</h2>
-                
+
                 <p class="kachel-intro">
                     Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Wähle die passende Software für deinen Ausbildungsschwerpunkt, um die doppelte Buchführung interaktiv und vollständig digital zu trainieren.
                 </p>
-                
+
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/kontenverwaltung/" target="_blank" class="main-app-link">🏢 Buchhaltung: Industrie & Handel</a>
@@ -206,11 +252,11 @@
 
             <div class="kachel">
                 <h2>Volkswirtschaftslehre</h2>
-                
+
                 <p class="kachel-intro">
                     Verstehe das große Ganze. Unsere <strong>volkswirtschaftlichen Modelle</strong> veranschaulichen komplexe Zusammenhänge zwischen Märkten, Akteuren und staatlichen Eingriffen.
                 </p>
-                
+
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/einfacher_wirtschaftskreislauf/" target="_blank" class="main-app-link">🔄 Einfacher Wirtschaftskreislauf</a>
@@ -218,30 +264,30 @@
                             Verstehe die grundlegenden Tauschbeziehungen zwischen privaten Haushalten und Unternehmen. Verfolge Geld- und Güterströme in einer Basis-Volkswirtschaft ohne Staat.
                         </span>
                     </div>
-                    
+
                     <div class="link-item">
                         <a href="/erweiterter_wirtschaftskreislauf/" target="_blank" class="main-app-link">🌍 Erweiterter Wirtschaftskreislauf</a>
                         <span class="app-desc">
                             Betrachte das erweiterte Modell: Binde den Staat, Banken (Kapitalsammelstellen) und das Ausland ein, um realitätsnahe makroökonomische Prozesse zu analysieren.
                         </span>
                     </div>
-                    
+
                     <div class="link-item">
                         <a href="/bip/" target="_blank" class="main-app-link">📈 Musterland Simulation BIP</a>
                         <span class="app-desc">
                             „Musterland“ ist eine Wirtschaftssimulation, in der Schüler als Regierung durch bis zu 100 Szenarien die Mechanik des BIP steuern. Das Dashboard gibt Sofort-Feedback zu Zielkonflikten, während der PDF-Export die Ergebnisse für die Analyse im Unterricht sichert. So wird Theorie zu angewandtem Systemverständnis.
                         </span>
                     </div>
-                </div> 
+                </div>
             </div>
 
             <div class="kachel">
                 <h2>Sonstiges</h2>
-                
+
                 <p class="kachel-intro">
                     Weitere hilfreiche Tools, Rechner und Simulationen für den kaufmännischen Alltag und vertiefende Themen im Wirtschaftsunterricht.
                 </p>
-                
+
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/entgeltabrechnung/" target="_blank" class="main-app-link">💶 Entgeltabrechnung</a>
