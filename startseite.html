@@ -15,14 +15,13 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            
             hyphens: auto;
             -webkit-hyphens: auto;
         }
 
         /* --- Header & Board Button --- */
         header {
-            position: relative; /* Wichtig für die Positionierung des Buttons */
+            position: relative;
             background-color: #0f172a;
             color: white;
             text-align: center;
@@ -68,7 +67,6 @@
             font-weight: 300;
         }
 
-        /* Responsive Anpassung für den Header auf kleinen Bildschirmen */
         @media (max-width: 768px) {
             header {
                 padding: 2rem 1rem;
@@ -84,60 +82,102 @@
             }
         }
 
-        /* --- Container & Grid --- */
+        /* --- Container --- */
         main {
             width: 95%;
-            max-width: 1500px; /* VERGRÖSSERT, damit 4 Kacheln nebeneinander passen */
-            margin: -3rem auto 3rem auto;
+            max-width: 900px; /* Schön schmal für die Liste */
+            margin: 3rem auto; /* Genug Abstand zum Header! */
             display: flex;
             flex-direction: column;
+            gap: 1.5rem; /* Abstand zwischen den zugeklappten Kacheln */
         }
 
-        .kachel-grid {
-            display: grid;
-            /* Mindestbreite leicht verringert, damit 4 Spalten auf Standard-Laptops passen */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        /* --- KACHEL-DESIGN --- */
+        /* --- Aufklappbare Kacheln (Akkordeon) --- */
         .kachel {
             background: white;
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-top: 6px solid #3b82f6;
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #3b82f6;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .kachel h2 {
-            margin-top: 0;
-            font-size: 1.6rem;
+        .kachel-header {
+            width: 100%;
+            background: white;
+            border: none;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+            transition: background 0.2s;
+        }
+
+        .kachel-header:hover {
+            background: #f1f5f9;
+        }
+
+        .kachel-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
             color: #0f172a;
             font-weight: 700;
+        }
+
+        .icon-pfeil {
+            font-size: 1.2rem;
+            color: #3b82f6;
+            transition: transform 0.3s ease;
+        }
+
+        /* Wenn die Kachel aktiv/offen ist */
+        .kachel.active {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0; /* Etwas mehr Platz nach oben und unten machen, wenn offen */
+        }
+
+        .kachel.active .icon-pfeil {
+            transform: rotate(180deg); /* Pfeil dreht sich nach oben */
+        }
+
+        .kachel.active .kachel-header {
             border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
+        }
+
+        /* Der eigentliche Inhalt, standardmäßig versteckt */
+        .kachel-content {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .kachel.active .kachel-content {
+            display: block; /* Inhalt anzeigen, wenn aktiv */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .kachel-intro {
             color: #475569;
             font-size: 1.05rem;
             line-height: 1.6;
+            margin-top: 0;
             margin-bottom: 2rem;
             text-align: justify;
         }
 
-        /* --- PROGRAMM-BOXEN (Gerahmt) --- */
+        /* --- PROGRAMM-BOXEN --- */
         .link-liste {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        /* Einheitliches Design für ALLE Boxen */
         .link-item {
             border: 1px solid #93c5fd;
             border-radius: 8px;
@@ -150,7 +190,6 @@
             border-color: #2563eb;
         }
 
-        /* Einheitliches Design für ALLE Buttons */
         .main-app-link {
             display: block;
             box-sizing: border-box;
@@ -195,21 +234,20 @@
 
     <header>
         <a href="board.html" class="header-board-link">🎓 Zum Teacher-Board</a>
-
         <h1>wirtschaftslab-schule</h1>
         <p class="subtitle">Interaktive Lernprogramme für Wirtschaft und Rechnungswesen</p>
     </header>
 
     <main>
-        <div class="kachel-grid">
-
-            <div class="kachel">
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
                 <h2>Rechnungswesen</h2>
-
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
                 <p class="kachel-intro">
                     Unsere Programme sind <strong>handlungsorientiert und praxisnah</strong> gestaltet. Wähle die passende Software für deinen Ausbildungsschwerpunkt, um die doppelte Buchführung interaktiv und vollständig digital zu trainieren.
                 </p>
-
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/kontenverwaltung/" target="_blank" class="main-app-link">🏢 Buchhaltung: Industrie & Handel</a>
@@ -217,23 +255,25 @@
                             Speziell optimiert für Ausbildungsberufe in Industrie und Handel. Erfasse typische kaufmännische Geschäftsfälle im Grundbuch, buche mit Fokus auf Bestands- und Erfolgskonten und schließe Konten eigenständig ab. Die Ergebnisse lassen sich als strukturiertes PDF sichern.
                         </span>
                     </div>
-
                     <div class="link-item">
                         <a href="/kontenverwaltung_bank/" target="_blank" class="main-app-link">🏦 Buchhaltung: Bankwesen</a>
                         <span class="app-desc">
-                            Maßgeschneidert für angehende Bankkaufleute. Dieses Modul fokussiert sich auf die Besonderheiten der Bankbuchführung. Trainiere banktypische Geschäftsfälle, arbeite mit speziellen Kontenrahmen des Finanzsektors und verbuche Vorgänge im Kunden- und Eigengeschäft. Auch hier ist der PDF-Export integriert.
+                            Maßgeschneidert für angehende Bankkaufleute. Dieses Modul fokussiert sich auf die Besonderheiten der Bankbuchführung. Trainiere banktypische Geschäftsfälle, arbeite mit speziellen Kontenrahmen des Finanzsektors und verbuche Vorgänge im Kunden- und Eigengeschäft.
                         </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="kachel">
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
                 <h2>Betriebswirtschaftslehre</h2>
-
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
                 <p class="kachel-intro">
                     Theorie wird hier zur Praxis. Erlebe <strong>betriebswirtschaftliche Entscheidungen</strong> hautnah und simuliere die Auswirkungen von Kosten, Preisen und Marktentwicklungen auf den Unternehmenserfolg.
                 </p>
-
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/break-even-point/" target="_blank" class="main-app-link">📊 Break-Even-Point Simulator</a>
@@ -249,14 +289,17 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="kachel">
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
                 <h2>Volkswirtschaftslehre</h2>
-
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
                 <p class="kachel-intro">
                     Verstehe das große Ganze. Unsere <strong>volkswirtschaftlichen Modelle</strong> veranschaulichen komplexe Zusammenhänge zwischen Märkten, Akteuren und staatlichen Eingriffen.
                 </p>
-
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/einfacher_wirtschaftskreislauf/" target="_blank" class="main-app-link">🔄 Einfacher Wirtschaftskreislauf</a>
@@ -264,30 +307,31 @@
                             Verstehe die grundlegenden Tauschbeziehungen zwischen privaten Haushalten und Unternehmen. Verfolge Geld- und Güterströme in einer Basis-Volkswirtschaft ohne Staat.
                         </span>
                     </div>
-
                     <div class="link-item">
                         <a href="/erweiterter_wirtschaftskreislauf/" target="_blank" class="main-app-link">🌍 Erweiterter Wirtschaftskreislauf</a>
                         <span class="app-desc">
                             Betrachte das erweiterte Modell: Binde den Staat, Banken (Kapitalsammelstellen) und das Ausland ein, um realitätsnahe makroökonomische Prozesse zu analysieren.
                         </span>
                     </div>
-
                     <div class="link-item">
                         <a href="/bip/" target="_blank" class="main-app-link">📈 Musterland Simulation BIP</a>
                         <span class="app-desc">
-                            „Musterland“ ist eine Wirtschaftssimulation, in der Schüler als Regierung durch bis zu 100 Szenarien die Mechanik des BIP steuern. Das Dashboard gibt Sofort-Feedback zu Zielkonflikten, während der PDF-Export die Ergebnisse für die Analyse im Unterricht sichert. So wird Theorie zu angewandtem Systemverständnis.
+                            „Musterland“ ist eine Wirtschaftssimulation, in der Schüler als Regierung durch bis zu 100 Szenarien die Mechanik des BIP steuern. Das Dashboard gibt Sofort-Feedback zu Zielkonflikten.
                         </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="kachel">
+        <div class="kachel">
+            <button class="kachel-header" onclick="toggleKachel(this)">
                 <h2>Sonstiges</h2>
-
+                <span class="icon-pfeil">▼</span>
+            </button>
+            <div class="kachel-content">
                 <p class="kachel-intro">
                     Weitere hilfreiche Tools, Rechner und Simulationen für den kaufmännischen Alltag und vertiefende Themen im Wirtschaftsunterricht.
                 </p>
-
                 <div class="link-liste">
                     <div class="link-item">
                         <a href="/entgeltabrechnung/" target="_blank" class="main-app-link">💶 Entgeltabrechnung</a>
@@ -297,8 +341,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
     </main>
 
     <footer>
@@ -306,6 +350,23 @@
         <a href="impressum.html" style="color: #64748b; text-decoration: none; margin-right: 15px;">Impressum</a>
         <a href="datenschutz.html" style="color: #64748b; text-decoration: none;">Datenschutzerklärung</a>
     </footer>
+
+    <script>
+        function toggleKachel(button) {
+            const geklickteKachel = button.parentElement;
+            const alleKacheln = document.querySelectorAll('.kachel');
+
+            // 1. Alle anderen Kacheln schließen
+            alleKacheln.forEach(kachel => {
+                if (kachel !== geklickteKachel) {
+                    kachel.classList.remove('active');
+                }
+            });
+
+            // 2. Die geklickte Kachel öffnen (oder wieder schließen, wenn sie schon offen war)
+            geklickteKachel.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
