@@ -74,9 +74,34 @@
             gap: 0.5rem; /* Abstand zwischen den normalen Menü-Buttons */
         }
 
-        /* NEU: Teacher-Board Link als Kachel in der Sidebar */
+        /* Teacher-Board Link als Kachel in der Sidebar */
         .sidebar-board-link {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            text-decoration: none;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 0.8rem; /* Abstand zum Studio-Button */
+        }
+
+        .sidebar-board-link:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+        }
+
+        /* NEU: Lege-Video Studio Link */
+        .sidebar-studio-link {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9); /* Lila Farbverlauf */
             color: white;
             text-decoration: none;
             padding: 1.2rem 1.5rem;
@@ -93,9 +118,9 @@
             margin-bottom: 1.5rem; /* Deutlicher Abstand zu den anderen Kacheln */
         }
 
-        .sidebar-board-link:hover {
+        .sidebar-studio-link:hover {
             transform: scale(1.02);
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
             box-shadow: 0 6px 10px rgba(0,0,0,0.3);
         }
 
@@ -271,6 +296,10 @@
 
             <a href="wirtschaftslab-board/board.html" class="sidebar-board-link" target="_blank">
                 🎓 Zum Teacher-Board
+            </a>
+
+            <a href="/wirtschaftslab-studio/" class="sidebar-studio-link" target="_blank">
+                🎬 Zum Lege-Video Studio
             </a>
 
             <button class="menu-btn active" onclick="switchCategory('rw', this)">
